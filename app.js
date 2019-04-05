@@ -6,6 +6,7 @@ $('#mulligan').css('margin-right', '35px');
 let addDieBtn = document.getElementById('generate-dice');
 $(addDieBtn).click(generateDie)
 let diceOnBoard = []
+let diceTotals = 0;
 
 
 class D6 {
@@ -20,14 +21,14 @@ class D6 {
         this.div.css('width', '100px');
         this.div.css('float', 'left');
         this.div.css('margin', '20px');
-        this.div.click(() => { 
-        this.reroll()
-        this.div.text(this.rollOutcome)
-        }) 
+        this.div.click(() => {
+            this.reroll()
+            this.div.text(this.rollOutcome)
+        })
+        //indexOf can be used
         this.div.dblclick(() => {
-           this.div.remove();
-           diceOnBoard.splice(this.div, 1);
-
+            diceOnBoard.splice($.inArray(this, diceOnBoard), 1);
+            this.div.remove();
         });
     }
     rollD6() {
@@ -56,6 +57,17 @@ function mulligan() {
 }
 
 $('#mulligan').click(mulligan);
+
+//starts at end of array
+// $('#sum-dice').click(() => {
+
+//     let diceTotals = 0;
+
+//     for (let i = diceOnBoard.length - 1; i >= 0; i--) {
+//         diceTotals += (diceOnBoard[i].rollOutcome)
+//     }
+//     alert(diceTotals);
+// });
 
 $('#sum-dice').click(() => {
 
